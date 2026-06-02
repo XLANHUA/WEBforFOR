@@ -396,16 +396,23 @@ body {
     text-align: left;
 }
 
+/* 修改成現代 Flexbox 寫法：完美對齊高度 */
 @media (min-width: 640px) {
     .scenarios-grid {
-        display: block;
-        text-align: justify;
+        display: flex;             /* 啟用 flex 佈局 */
+        justify-content: space-between; /* 讓三張卡片平均分配寬度 */
+        align-items: stretch;      /* ? 核心大絕招：讓所有卡片自動拉伸到跟最高的那格一樣高 */
     }
-    .scenarios-grid::after { content: ''; display: inline-block; width: 100%; }
+    
+    /* 移除原本影響對齊的 ::after 偽元素 */
+    .scenarios-grid::after { 
+        display: none; 
+    }
+    
     .scenario-card {
-        display: inline-block;
-        width: 31%;
-        vertical-align: top;
+        display: flex;             /* 讓卡片內部也變成 flex 結構 */
+        flex-direction: column;    /* 內容維持由上往下排列 */
+        width: 31%;                /* 保持原本的寬度比例 */
         margin-bottom: 0;
     }
 }
